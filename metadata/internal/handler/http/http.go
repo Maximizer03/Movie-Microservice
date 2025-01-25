@@ -22,8 +22,10 @@ func New(ctrl *metadata.Controller) *Handler {
 
 // GetMetadata handles GET /metadata requests.
 func (h *Handler) GetMetadata(w http.ResponseWriter, req *http.Request) {
+	log.Print("Handling get metadata request")
 	id := req.FormValue("id")
 
+	log.Print("ID: ", id)
 	if id == "" {
 		w.WriteHeader(http.StatusBadRequest)
 		return

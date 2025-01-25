@@ -3,6 +3,7 @@ package metadata
 import (
 	"context"
 	"errors"
+	"log"
 
 	"movieexample.com/metadata/internal/repository"
 	"movieexample.com/metadata/pkg/model"
@@ -27,6 +28,7 @@ func New(repo metadataRepository) *Controller {
 
 // Get returns movie metadata by id.
 func (c *Controller) Get(ctx context.Context, id string) (*model.Metadata, error) {
+	log.Print("Getting metadata for movie with id: ", id)
 	res, err := c.repo.Get(ctx, id)
 	if err != nil && errors.Is(err, repository.ErrNotFound) {
 		return nil, ErrNotFound
